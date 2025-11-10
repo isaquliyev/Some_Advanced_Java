@@ -1,6 +1,7 @@
 package enums;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -62,7 +63,7 @@ enum Weekday implements Localizable {
 
         int total = day + 2 +
                 IntStream.range(0, month.ordinal())
-                        .map(i -> Month.values()[i].getDayCount())
+                        .map(i -> Month.values()[i].dayCountSupplier.get())
                         .sum();
 
         int index = total % 7 != 0 ? total % 7 - 1 : 6;
@@ -79,6 +80,10 @@ enum Weekday implements Localizable {
      */
     public boolean isThisDay(Month month, Integer day) {
         return this == getWeekDay(month, day);
+    }
+
+    public BiFunction<Month, Integer, Boolean> isThisDayBiFunction() {
+        return (month, num) -> this == getWeekDay(month, num);
     }
 
     /**
@@ -120,6 +125,10 @@ enum Weekday implements Localizable {
      */
     public static Weekday nextDay(Weekday weekday, Integer n) {
         return Weekday.values()[(weekday.ordinal() + n) % 7];
+    }
+
+    public static BiFunction<Weekday, Integer, Weekday> nextDayBiFunction() {
+        return (weekday, num) -> Weekday.values()[(weekday.ordinal() + num) % 7];
     }
 
     @Override

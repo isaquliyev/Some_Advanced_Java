@@ -1,5 +1,8 @@
 package enums;
 
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 /**
  * Represents the twelve months of the Gregorian calendar.
  * <p>
@@ -57,7 +60,7 @@ enum Month implements Localizable {
     private final String englishName;
     private final String hungarianName;
     private final String azerbaijaniName;
-    private final Integer dayCount;
+    public final Supplier<Integer> dayCountSupplier;
 
     /**
      * Constructs a {@code Month} constant with localized names and day count.
@@ -71,7 +74,8 @@ enum Month implements Localizable {
         this.englishName = englishName;
         this.hungarianName = hungarianName;
         this.azerbaijaniName = azerbaijaniName;
-        this.dayCount = dayCount;
+        this.dayCountSupplier = () -> dayCount;
+
     }
 
     /**
@@ -84,16 +88,10 @@ enum Month implements Localizable {
         return lang.getName(this);
     }
 
-    /**
-     * Returns the number of days in this month.
-     * <p>
-     * Note: This value does not account for leap years.
-     *
-     * @return the number of days in this month
-     */
-    public Integer getDayCount() {
-        return dayCount;
+    public Function<Language, String> getNameFunction() {
+        return (language) -> language.getName(this);
     }
+
 
     @Override
     public String getEnglishName() {
