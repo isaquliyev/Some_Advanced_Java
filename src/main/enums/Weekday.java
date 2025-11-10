@@ -2,6 +2,7 @@ package enums;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;
+import java.util.function.Supplier;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -27,6 +28,7 @@ enum Weekday implements Localizable {
     private final String englishName;
     private final String hungarianName;
     private final String azerbaijaniName;
+    private static int localStorageCount = 0;
 
 
     /**
@@ -145,4 +147,7 @@ enum Weekday implements Localizable {
     public String getAzerbaijaniName() {
         return this.azerbaijaniName;
     }
+
+    public static final Supplier<Weekday> callBasedWeekdaySupplier =
+            () -> nextDayBiFunction().apply(Weekday.MONDAY, localStorageCount++);
 }
