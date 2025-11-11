@@ -1,7 +1,9 @@
 package enums;
 
+import java.util.Arrays;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
@@ -154,4 +156,16 @@ public enum Weekday implements Localizable {
 
     public static final Function<Weekday, Weekday> callBasedWeekdayFunction =
             (weekday) -> nextDayBiFunction().apply(weekday, callBasedIteratorForGivenWeekday++);
+
+
+    public static final Predicate<String> isWeekday =
+        (String weekdayString) -> Arrays.stream(Weekday.values())
+                .anyMatch(weekday -> weekdayString.equalsIgnoreCase(weekday.getEnglishName()));
+
+    public static final Function<String, Weekday> getWeekdayForGivenName = (weekdayString) ->
+            Arrays.stream(Weekday.values())
+                    .filter(w -> w.name().equalsIgnoreCase(weekdayString))
+                    .findAny()
+                    .orElse(null);
+
 }

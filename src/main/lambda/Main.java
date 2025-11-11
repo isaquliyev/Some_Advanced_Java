@@ -21,10 +21,11 @@ public class Main {
                     - s2.chars().filter(c -> c == 'a' || c == 'A').count());
 
     private static final BiFunction<String, String, Integer> sorterBasedOnWeekday =
-            (s1, s2) -> Arrays
-                    .stream(Weekday.values())
-                    .anyMatch(weekday -> s1.contains(weekday.getEnglishName())
-                    || s2.contains(weekday.getEnglishName())
-                            ) ? -1 : 1;
+            (s1, s2) -> Weekday.isWeekday.test(s1) && !Weekday.isWeekday.test(s2) ? -1
+                    : !Weekday.isWeekday.test(s1) && Weekday.isWeekday.test(s2) ? 1
+                    : !Weekday.isWeekday.test(s1) && !Weekday.isWeekday.test(s2) ? -1
+                    : - Weekday.getWeekdayForGivenName.apply(s2).ordinal()
+                    + Weekday.getWeekdayForGivenName.apply(s1).ordinal()
+            ;
 }
 
