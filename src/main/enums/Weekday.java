@@ -1,11 +1,10 @@
 package enums;
 
-import java.util.Arrays;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
+
 
 
 /**
@@ -17,7 +16,7 @@ import java.util.stream.Stream;
  *
  *
  */
-enum Weekday implements Localizable {
+public enum Weekday implements Localizable {
     MONDAY("Monday", "Hetfo", "Bazar ertesi"),
     TUESDAY("Tuesday", "Kedd", "Cersembe axsami"),
     WEDNESDAY("Wednesday", "Szerda", "Cersembe"),
