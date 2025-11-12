@@ -10,10 +10,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //Arrays.stream(LambdaSandbox.createArray(5, (integer -> 2 * integer))).forEach(System.out::print);
+        /// Arrays.stream(LambdaSandbox.createArray(5, (integer -> 2 * integer))).forEach(System.out::print);
 
-        Arrays.stream(LambdaSandbox.createMatrix(2, 8, ((n, m) -> 2 * n + 3 * m))).forEach(arr -> Arrays.stream(arr).forEach(System.out::println));
+        /// Arrays.stream(LambdaSandbox.createMatrix(2, 8, ((n, m) -> 2 * n + 3 * m))).forEach(arr -> Arrays.stream(arr).forEach(System.out::println));
 
+        // System.out.println(LambdaSandbox.compose((x) -> 2 * x, (x) -> 3 * x).apply(5));
 
     }
 
