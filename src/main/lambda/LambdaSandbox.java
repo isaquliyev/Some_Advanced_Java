@@ -18,6 +18,10 @@ public class LambdaSandbox {
         return arr;
     }
 
+    public static Function<Integer, Integer> compose(Function<Integer, Integer> f, Function<Integer, Integer> g) {
+        return (x) -> f.apply(g.apply(x));
+    }
+
 }
 
 
