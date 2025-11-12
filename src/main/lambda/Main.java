@@ -16,6 +16,8 @@ public class Main {
 
         // System.out.println(LambdaSandbox.compose((x) -> 2 * x, (x) -> 3 * x).apply(5));
 
+        System.out.println(LambdaSandbox.iterate(x -> 2 * x, 5).apply(1));
+
     }
 
     private static final BiFunction<String, String, Integer> countSorterBasedOnA =

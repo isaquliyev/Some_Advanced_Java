@@ -3,6 +3,7 @@ package lambda;
 import java.util.Arrays;
 import java.util.function.*;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LambdaSandbox {
 
@@ -40,6 +41,19 @@ public class LambdaSandbox {
      */
     public static Function<Integer, Integer> compose(Function<Integer, Integer> f, Function<Integer, Integer> g) {
         return (x) -> f.apply(g.apply(x));
+    }
+
+    /**
+     * Method that takes function f and iterates f n times in a row
+     * @param f The function will be iterated
+     * @param n Count of iterates
+     * @return n * f iterated function
+     */
+    public static Function<Integer, Integer> iterate(Function<Integer, Integer> f, int n) {
+        return Stream.generate(() -> f)
+                .limit(n)
+                .reduce(Function.identity(),
+                        (acc, func) -> compose(func, acc));
     }
 
 }
