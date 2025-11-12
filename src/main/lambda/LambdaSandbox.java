@@ -1,36 +1,22 @@
 package lambda;
 
+import java.util.Arrays;
 import java.util.function.*;
+import java.util.stream.IntStream;
 
 public class LambdaSandbox {
 
-    ///  Runnable -> () -> void | Takes nothing and do nothing as well
-    public void runnableTest() {
-        System.out.println("Runnable Test Traditional");
+    public static Integer[] createArray(int n, Function<Integer, Integer> f) {
+        Integer[] arr = new Integer[n];
+        IntStream.range(0, n).forEach(x -> arr[x] = f.apply(x));
+        return arr;
     }
 
-    public Runnable r = () -> System.out.println("Runnable Testing Lambda");
-
-
-    public <T> void consumerTest(T input)  {
-        System.out.println("Entered " + input + " traditionally");
+    public static Integer[][] createMatrix(int n, int m, BiFunction<Integer, Integer, Integer> f) {
+        Integer[][] arr = new Integer[n][m];
+        IntStream.range(0, n).forEach(i -> IntStream.range(0, m).forEach(j -> arr[i][j] = f.apply(i, j)));
+        return arr;
     }
-
-    public Consumer<String> c = (input) -> System.out.println("Entered " + input + " traditionally");
-
-
-    public void intConsumerTest(int input) {
-        System.out.println(input);
-    }
-
-    public IntConsumer intConsumer = System.out::println;
-
-    public Supplier<Double> randomSupplier = () -> Math.random();
-
-    public Function<String, Integer> lengthCalculator = String::length;
-
-    public IntFunction<String> aGenerator = "a"::repeat;
-
 
 }
 
